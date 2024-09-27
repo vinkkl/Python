@@ -1,0 +1,46 @@
+stock = {
+    'apple': 10,
+    'banana': 20,
+    'orange': 15
+}
+
+cart = {}
+
+def add_to_cart(item, quantity):
+    if item in stock and stock[item] >= quantity:
+        cart[item] = cart.get(item, 0) + quantity
+        stock[item] -= quantity
+        print(f"Added {quantity} {item}(s) to the cart.")
+    else:
+        print(f"Sorry, we don't have enough {item}(s) in stock.")
+
+def remove_from_cart(item, quantity):
+    if item in cart and cart[item] >= quantity:
+        cart[item] -= quantity
+        stock[item] += quantity
+        if cart[item] == 0:
+            del cart[item]
+        print(f"Removed {quantity} {item}(s) from the cart.")
+    else:
+        print(f"Sorry, you don't have enough {item}(s) in your cart.")
+
+def display_cart():
+    print("Shopping Cart:")
+    for item, quantity in cart.items():
+        print(f"{item}: {quantity}")
+    if not cart:
+        print("Your cart is empty.")
+
+def display_stock():
+    print("Stock:")
+    for item, quantity in stock.items():
+        print(f"{item}: {quantity}")
+
+add_to_cart('apple', 3)
+add_to_cart('banana', 5)
+display_cart()
+display_stock()
+
+remove_from_cart('apple', 1)
+display_cart()
+display_stock()
